@@ -164,13 +164,13 @@
 function globError(){
     try{
       alert('start try');
-      firstNum.innerHTML = eval('${firstNum}');
-      secondNum.innerHTML = eval('${secondNum}');
+      let fNum = eval('${firstNum}');
+      alert(fNum.innerHTML);
       alert('End of try');
     }
     catch(err){
       console.error(err);
-      alert('error error eror oh no');
+      alert('error error oh no');
     }
     finally{
       console.log('yeah buddy');
