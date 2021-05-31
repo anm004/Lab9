@@ -54,6 +54,7 @@
     <button>Console Trace</button>
     <button>Trigger a Global Error</button>
   </section>
+
 <!--Track JS Script-->
 <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 <script>
@@ -63,9 +64,6 @@
   });
 </script>
                         
-
-
-
   <script>
     let calculateBtn = document.querySelector('#calculate');
     calculateBtn.addEventListener('click', () => {
@@ -82,10 +80,12 @@
     //console log demo
     errorBtns[0].addEventListener('click', () => {
       console.log('Life is short. Time is luck.');
+      TrackJS.track('Testing TrackJS!');
     });
     //console error demo
     errorBtns[1].addEventListener('click', () => {
       console.error('Like tears in the rain');
+      TrackJS.track('Testing TrackJS!');
     });
     //console dir
     errorBtns[2].addEventListener('click', () => {
