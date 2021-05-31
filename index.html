@@ -54,6 +54,17 @@
     <button>Console Trace</button>
     <button>Trigger a Global Error</button>
   </section>
+<!--Track JS Script-->
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "6fd3bf7f7a0743e39d5ee519711aca3c"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>
+                        
+
+
 
   <script>
     let calculateBtn = document.querySelector('#calculate');
@@ -67,6 +78,116 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // TODO - Make buttons functional
+
+    //console log demo
+    errorBtns[0].addEventListener('click', () => {
+      console.log('Life is short. Time is luck.');
+    });
+    //console error demo
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Like tears in the rain');
+    });
+    //console dir
+    errorBtns[2].addEventListener('click', () => {
+      console.dir(document.head);
+    });
+    //console dirxml
+    errorBtns[3].addEventListener('click', () => {
+      console.dirxml(document);
+    });
+    //console group start
+    const label = 'Michael Mann Masterpieces';
+    errorBtns[4].addEventListener('click', () => {
+      console.group(label);
+      console.info('Heat');
+      console.info('Miami Vice');
+      console.info('Collateral');
+    });
+    //console group end
+    errorBtns[5].addEventListener('click', () => {
+      console.groupEnd(label);
+    });
+    //console table
+    errorBtns[6].addEventListener('click', () => {
+      console.table([
+        {
+          city: 'Miami',
+          state: 'Florida',
+        },
+        {
+          city: 'Los Angeles',
+          state: 'California',
+          population: 'unfathomable',
+        },
+        {
+          city: 'New York',
+          state: 'New York',
+          population: 'walking here',
+        }
+      ]);
+    });
+    //start timer
+    errorBtns[7].addEventListener('click', () => {
+      console.time();
+      for (var i = 0; i < 100000; i++) {
+        let square = i ** 2;
+}
+    });
+    //end timer
+    errorBtns[8].addEventListener('click', () => {
+      console.timeEnd();
+      TrackJS.track('Testing TrackJS!');
+    });
+    //console trace
+    errorBtns[9].addEventListener('click', () => {
+      const first = () => { second(); };
+      const second = () => { third(); };
+      const third = () => { fourth(); };
+      const fourth = () => { console.trace(); };
+      first();
+    });
+    //trigger a global error
+    errorBtns[10].addEventListener('click', () => {
+      TrackJS.track('Testing TrackJS!');
+      globError();
+      TrackJS.track('Testing TrackJS!');
+      test();
+      try {
+        test();
+      } catch(err) {
+      alert(err.message); // uh oh spaghetti o
+      alert(err.name); // CustomError
+      alert(err.stack); // a list of nested calls with line numbers for each
+      }
+      TrackJS.track('Testing TrackJS!');
+    });
+function globError(){
+    try{
+      alert('start try');
+      firstNum.innerHTML = eval('${firstNum}');
+      secondNum.innerHTML = eval('${secondNum}');
+      alert('End of try');
+    }
+    catch(err){
+      console.error(err);
+      alert('error error eror oh no');
+    }
+    finally{
+      console.log('yeah buddy');
+    }
+  }
+
+    class CustomError extends Error {
+      constructor(message) {
+        super(message); // (1)
+        this.name = "CustomError"; // (2)
+  }
+}
+
+function test() {
+  throw new CustomError("uh oh spaghetti o");
+}
+
   </script>
 </body>
 </html>
